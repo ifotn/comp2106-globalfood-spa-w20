@@ -21,4 +21,14 @@ export class FoodService {
   addFood(newFood) {
     return this.http.post('http://localhost:3000/foods', newFood, { headers: headers } )
   }
+
+  // delete
+  deleteFood(_id) {
+    return this.http.delete('http://localhost:3000/foods/' + _id, { headers: headers })
+  }
+
+  // update
+  updateFood(food) {
+    return this.http.put('http://localhost:3000/foods/' + food._id, food, { headers: headers })
+  }
 }

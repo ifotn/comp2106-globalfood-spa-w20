@@ -39,6 +39,7 @@ export class FoodComponent implements OnInit {
   }
 
   clearForm(): void {
+    this._id = null;
     this.name = null;
     this.country = null;
   }
@@ -48,4 +49,34 @@ export class FoodComponent implements OnInit {
     this.getFoods()
   }
 
+  deleteFood(_id: any) {
+    if (confirm('Are you sure?')) {
+      this.foodService.deleteFood(_id).subscribe(response => {
+        this.getFoods()
+      })
+    }
+  }
+
+  // display selected food in the form for editing
+  selectFood(food): void {
+    this._id = food._id;
+    this.name = food.name;
+    this.country = food.country;
+  }
+
+  // update selected food from the form values
+  updateFood(): void {
+    // create food object from the form values
+    let food = {
+      _id: this._id,
+      name: this.name,
+      country: this.country
+    }
+
+    // call the service to update
+    this.foodService.updateFood(food).subscribe(response => {
+      this.getFoods()
+      this.clearForm()
+    })
+  }
 }

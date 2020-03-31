@@ -42,6 +42,37 @@ router.post('/', (req, res, next) => {
     })
 })
 
+// DELETE: /foods/abc123
+router.delete('/:_id', (req, res, next) => {
+    Food.remove({ _id: req.params._id }, (err, food) => {
+        if (err) {
+            console.log(err)
+            return res.json(err).status(501)
+        }
+        else {
+            return res.json(food).status(204) // 204: No Content
+        }
+    })
+})
+
+// PUT: /foods/abc123
+router.put('/:_id', (req, res, next) => {
+    Food.update({ _id: req.params._id },
+        {
+            $set: {
+                name: req.body.name,
+                country: req.body.country
+            }
+        }, null, (err, food) => {
+        if (err) {
+            console.log(err)
+            return res.json(err).status(501)
+        }
+        else {
+            return res.json(food).status(200) // 202: Accepted
+        }
+    })
+})
 
 // make this controller public
 module.exports = router

@@ -10,13 +10,20 @@
     <label class="col-md-2" for="country">Country: *</label>
     <input name="country" id="country" required [(ngModel)]="country" />
   </fieldset>
-  <button class="offset-2 btn btn-primary" (click)="addFood()">Save</button>
+  <input name="_id" id="_id" type="hidden" [(ngModel)]="_id" />
+  <button class="offset-2 btn btn-primary" (click)="addFood()" *ngIf="!_id">Add</button>
+  <button class="offset-2 btn btn-primary" (click)="updateFood()" *ngIf="_id">Update</button>
+  <button class="btn btn-primary" (click)="clearForm()">Reset</button>
 </section>
 
 <table class="table table-striped table-hover">
-  <thead><th>Name</th><th>Country</th></thead>
+  <thead><th>Name</th><th>Country</th><th></th></thead>
   <tr *ngFor="let food of foods">
     <td>{{ food.name }}</td>
     <td>{{ food.country }}</td>
+    <td>
+      <button class="btn btn-info" (click)="selectFood(food)">Edit</button>
+      <button class="btn btn-danger" (click)="deleteFood(food._id)">Delete</button>
+    </td>
   </tr>
 </table>
