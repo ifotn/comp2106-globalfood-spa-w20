@@ -1,1 +1,22 @@
 <h1>COMP2106 Global Food Market</h1>
+
+<section>
+  <h4>Add a Food</h4>
+  <fieldset>
+    <label class="col-md-2" for="name">Name: *</label>
+    <input name="name" id="name" required [(ngModel)]="name" />
+  </fieldset>
+  <fieldset>
+    <label class="col-md-2" for="country">Country: *</label>
+    <input name="country" id="country" required [(ngModel)]="country" />
+  </fieldset>
+  <button class="offset-2 btn btn-primary" (click)="addFood()">Save</button>
+</section>
+
+<table class="table table-striped table-hover">
+  <thead><th>Name</th><th>Country</th></thead>
+  <tr *ngFor="let food of foods">
+    <td>{{ food.name }}</td>
+    <td>{{ food.country }}</td>
+  </tr>
+</table>
